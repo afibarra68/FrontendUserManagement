@@ -1,6 +1,6 @@
 <div class="container-fluid p-0">
   <div class="row">
-    <form  [formGroup]="userCreate">
+    <form  [formGroup]="userCreate" (ngSubmit)="newUser()">
       <div class="text">
         <label for="name">Name</label>
         <input type="text" class="form-control" id="name" formControlName="name" name="name">
@@ -18,9 +18,11 @@
       </div>
       <div class="form-check">
         <input class="form-check-input" type="checkbox" value="true" id="flexCheckChecked" [checked]="" formControlName="active" name="active">
-        <label class="form-check-label" for="flexCheckChecked">{{activated}}</label>
+        <label class="form-check-label" for="flexCheckChecked" *ngIf="userCreate.value.active">Usuario Activo</label>
+        <label class="form-check-label" for="flexCheckChecked" *ngIf="!userCreate.value.active">Usuario no activo</label>
+        <label class="form-check-label" for="flexCheckChecked"></label>
       </div>
-      <button class="button-send btn btn-primary" (click)="newUser()">Guardar</button>
+      <button class="button-send btn btn-primary" type="submit" [disabled]="userCreate.invalid">Guardar</button>
     </form>
   </div>
 </div>

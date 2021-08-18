@@ -42,7 +42,7 @@
     <app-create-user (messageEvent)="receiveMessage($event)" (emmiterparentCreator)="connectorForHideCreator($event)" ></app-create-user>
   </div>
 
-  <div *ngIf="fastView == true" class="container p-0  view-window">
+  <div *ngIf="fastView == true" class="container  colorizacion-containers  p-3 view-window">
     <app-view (messageEvent)="receiveMessage($event)" (emmiterparentCreator)="connectorForHideCreator($event)"   class="p-0" *ngIf="userTemp" [detailUser]="userTemp"></app-view>
   </div>
 

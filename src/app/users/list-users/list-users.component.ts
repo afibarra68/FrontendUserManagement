@@ -52,7 +52,6 @@ export class ListUsersComponent implements OnInit {
       'pageNumber': this.pageNumber
     }).subscribe((res: any)=> {
       this.users  =  res.content
-      console.log(this.users)
     })
   }
 

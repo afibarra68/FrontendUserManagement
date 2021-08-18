@@ -1,6 +1,7 @@
 <div class="container-fluid">
+  <h3>Actualizar usuario</h3>
   <div class="row">
-    <form  [formGroup]="userCreate">
+    <form  [formGroup]="userCreate" novalidate (ngSubmit)="updateUser()" >
       <div class="text">
         <label for="id">Id</label>
         <input type="text" class="form-control" id="id" formControlName="id" name="id" >
@@ -21,11 +22,12 @@
         <label for="name">Status</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="true" id="flexCheckChecked" [checked]="" formControlName="active" name="active">
+        <input class="form-check-input" type="checkbox"  id="flexCheckChecked"  formControlName="active" name="active">
 
-        <label class="form-check-label" for="flexCheckChecked">{{activated}}</label>
+        <label class="form-check-label" for="flexCheckChecked" *ngIf="userCreate.value.active">Usuario Activo </label>
+        <label class="form-check-label" for="flexCheckChecked" *ngIf="!userCreate.value.active">Usuario No activo </label>
       </div>
-      <button class="button-send btn btn-primary" (click)="updateUser()" >Guardar</button>
+      <button class="button-send btn btn-primary" type="submit" [disabled]="userCreate.invalid"> Guardar</button>
     </form>
   </div>
 </div>

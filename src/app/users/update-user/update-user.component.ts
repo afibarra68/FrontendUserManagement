@@ -18,9 +18,7 @@ export class UpdateUserComponent implements OnInit {
 
   activated:string ='';
   userCreate:FormGroup;
-
   updateDataParent!:boolean;
-
   iUser!:IUser;
 
   constructor(
@@ -47,6 +45,7 @@ export class UpdateUserComponent implements OnInit {
 
 
   loadFormUser(user: IUser):void{
+    this.isActived(user.active)
     this.userCreate.patchValue({
       id: user.id,
       name: user.name,
@@ -67,7 +66,7 @@ export class UpdateUserComponent implements OnInit {
         this.emmiterparentCreator.emit(this.updateDataParent = false)
       },
       (error) => {
-        console.log(error);
+        alert(error)
       }
     );
   }
