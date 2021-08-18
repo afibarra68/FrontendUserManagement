@@ -16,30 +16,28 @@ export class UserService {
   public queryUser(req?: any): Observable<IUser[]> {
     let params = createRequestParams(req);
     return this.http.get<IUser[]>(`${environment.END_POINT}/api/user`, { params: params })
-      .pipe(map(res => {
-        return res;
-      }));
+      .pipe(map(res => {return res;}));
   }
   public queryAllUsers(req?: any): Observable<IUser[]> {
     let params = createRequestParams(req);
     return this.http.get<IUser[]>(`${environment.END_POINT}/api/bin`, { params: params })
-      .pipe(map(res => {
-        return res;
-      }));
+      .pipe(map(res => {return res;}));
   }
 
   public saveUser(user: IUser): Observable<IUser> {
     return this.http.post<IUser>(`${environment.END_POINT}/api/user`, user)
-      .pipe(map(res => {
-        return res;
-      }));
+      .pipe(map(res => {return res;}));
   }
 
   public deleteUser(id:string): Observable<String>{
     return this.http.delete<String>(`${environment.END_POINT}/api/user/f297a57a5a/${id}`)
-      .pipe(map(res => {
-        return res;
-      }));
+      .pipe(map(res => {return res;}));
   }
+
+  public updateUser(user: IUser): Observable<IUser> {
+    return this.http.put<IUser>(`${environment.END_POINT}/api/user`, user)
+      .pipe(map((res) => {return res;}));
+  }
+
 
 }

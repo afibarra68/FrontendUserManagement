@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IUser} from "../../../share/models/IUser";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
@@ -12,8 +12,16 @@ import {UserService} from "../user.service";
 export class UpdateUserComponent implements OnInit {
 
   @Input() dataIUser!: IUser;
+
+  @Output() messageEvent = new EventEmitter<boolean>()
+  @Output() emmiterparentCreator = new EventEmitter<boolean>()
+
   activated:string ='';
   userCreate:FormGroup;
+
+  updateDataParent!:boolean;
+
+  iUser!:IUser;
 
   constructor(
     private fb : FormBuilder,
@@ -21,10 +29,9 @@ export class UpdateUserComponent implements OnInit {
     private _us:UserService
   ) {
     this.userCreate = this.fb.group({
-      id: [''],
+      id: ['' ],
       name: ['', Validators.compose([
-        Validators.required,
-        Validators.maxLength(40)
+        Validators.required
       ])],
       active: ['', Validators.compose([
         Validators.required,
@@ -40,14 +47,32 @@ export class UpdateUserComponent implements OnInit {
 
 
   loadFormUser(user: IUser):void{
-
     this.userCreate.patchValue({
       id: user.id,
       name: user.name,
       active: user.active,
-      rol:user.rol.rol
+      rol:user.rol.id
     })
   }
+
+
+  updateUser() : void {
+    this.iUser = this.userCreate.value
+    this.iUser.rol ={
+      id:this.userCreate.value.rol
+    }
+    this._us.updateUser(this.userCreate.value).subscribe(
+      () => {
+        alert("updated correctly")
+        this.emmiterparentCreator.emit(this.updateDataParent = false)
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+
 
 
   isActived(data:boolean):void {
@@ -55,7 +80,6 @@ export class UpdateUserComponent implements OnInit {
       this.activated = "Usuario no activo";
     }{
       this.activated = "Usuario Activo";
-
     }
   }
 

@@ -7,15 +7,14 @@ import {UserService} from "../user.service";
   templateUrl: './view.component.html',
   styleUrls: ['./view.component.scss']
 })
+
 export class ViewComponent implements OnInit {
 
   @Input() detailUser!: IUser;
-
   @Output() messageEvent = new EventEmitter<boolean>()
   @Output() emmiterparentCreator = new EventEmitter<boolean>()
 
   edit:boolean = false;
-  detailOnUpdate! :IUser;
   comunicator!:boolean ;
   showViewCreate!:boolean;
 
@@ -36,5 +35,11 @@ export class ViewComponent implements OnInit {
       this.emmiterparentCreator.emit(this.showViewCreate = false)
     })
 
+  }
+
+  updatedEasy($event: any) {
+    this.edit = $event
+    this.messageEvent.emit(this.comunicator = true)
+    this.emmiterparentCreator.emit(this.showViewCreate = false)
   }
 }

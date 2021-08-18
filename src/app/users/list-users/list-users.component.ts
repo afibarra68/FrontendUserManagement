@@ -46,10 +46,6 @@ export class ListUsersComponent implements OnInit {
   }
 
   searchUser():void{
-    console.log(this._fUserByName)
-
-
-
     this._us.queryAllUsers({
       'username': this._fUserByName,
       'pageSize': this.pageSize,
@@ -77,7 +73,7 @@ export class ListUsersComponent implements OnInit {
   }
 
   connectorForHideCreator($event: boolean) {
-    this.showDiff = $event
+    this.showDiff = $event;
     this.fastView = $event;
   }
 }

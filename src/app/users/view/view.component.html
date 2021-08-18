@@ -1,11 +1,16 @@
-
 <div class="container p-0">
-  <button (click)="updateItem()"  class="btn btn-primary">Editar</button>
-  <button  class="btn btn-danger" (click)="deleteItem(detailUser.id)">Eliminar</button>
+
+
+  <button *ngIf="edit == false" (click)="updateItem()" class="btn btn-primary">Editar</button>
+  <button *ngIf="edit == false" class="btn btn-danger" (click)="deleteItem(detailUser.id)">Eliminar</button>
   <div class="" *ngIf="edit == false">
     <h3>datos de usuario</h3>
-    <p class="text-view btn-light m-0">{{ "nombre: " +  detailUser.name}}</p>
-    <p class="text-view btn-light m-0">{{"estado: " +  detailUser.active}}</p>
+    <p class="text-view btn-light m-0">{{ "nombre: " + detailUser.name}}</p>
+    <p class="text-view btn-light m-0">{{"estado: " + detailUser.active}}</p>
     <p class="text-view btn-light m-0">{{"rol: " + detailUser.rol.rol}}</p>
+  </div>
+
+  <div *ngIf="edit == true"  class=" container updater">
+    <app-update-user  (emmiterparentCreator)="updatedEasy($event)"  [dataIUser]="detailUser"></app-update-user>
   </div>
 </div>
