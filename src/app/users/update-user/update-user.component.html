@@ -1,0 +1,30 @@
+<div class="container-fluid">
+  <div class="row">
+    <form  [formGroup]="userCreate">
+      <!--div class="text">
+        <label for="id">Id</label>
+        <input type="text" class="form-control" id="id" formControlName="id" name="id" >
+      </div-->
+      <div class="text">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" formControlName="name" name="name">
+      </div>
+      <div class="text">
+        <label for="rol">Rol</label>
+        <select class="custom-select my-1 mr-sm-2 form-control" id="rol" formControlName="rol" name="rol">
+          <option value="1">ADMINISTRADOR</option>
+          <option value="2">AUDITOR</option>
+          <option value="3">AUXILIAR</option>
+        </select>
+      </div>
+      <div class="text">
+        <label for="name">Status</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="true" id="flexCheckChecked" [checked]="" formControlName="active" name="active">
+        <label class="form-check-label" for="flexCheckChecked">{{activated}}</label>
+      </div>
+      <button class="button-send btn btn-primary">Guardar</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+
+<div class="container-fluid">
+  <button (click)="updateItem()"  class="btn btn-primary">editar</button>
+  <button  class="btn btn-danger">Eliminar</button>
+
+  <div class="" *ngIf="edit == false">
+    <h3>datos de usuario</h3>
+    <p class="text-view btn-light m-0">{{ "nombre: " +  detailUser.name}}</p>
+    <p class="text-view btn-light m-0">{{"estado: " +  detailUser.active}}</p>
+    <p class="text-view btn-light m-0">{{"rol: " + detailUser.rol.rol}}</p>
+  </div>
+</div>
