@@ -1,46 +1,50 @@
 
-<div class="container-fluid text-center">
+<div class="container colorizacion-containers p-3">
   <div class="contasiner-fluid">
-    <h3>Buscador de usuarios</h3>
+    <h3   class="p-3">Buscador de usuarios</h3>
   </div>
-  <div class="container-fluid">
-    <button class="btn btn-primary"  (click)="searchUser()" >find</button>
-    <button class="btn btn-primary"  (click)="searchUser()" >Clear</button>
+
+  <div class="container p-0">
+    <button class="btn btn-primary"  (click)="searchUser()">find</button>
+    <button class="btn btn-primary"  (click)="clearInfo()" >Clear</button>
   </div>
-  <div class="container-fluid p-1">
-  <input style="width: auto" class="form-control-sm form-control stl"  (keyup.enter)="searchUser()" type="text" [(ngModel)]="_fUserByName">
+
+  <div class="container p-0">
+  <input  class="form-control-sm form-control stl"  placeholder="Buscar usuario" (keyup.enter)="searchUser()" type="text" [(ngModel)]="_fUserByName">
   </div>
 </div>
 
-<div class="container-fluid">
-  <button (click)="redirectToNewForm(true)"  class="btn btn-success">Crear</button>
+<div class="container mt-3">
+
+  <div class="container p-0 text-right">
+    <button (click)="redirectToNewForm(true)"  class="btn btn-success">Crear</button>
+  </div>
+
+  <table *ngIf="listUsers == false"  class="table table-hover">
+
+    <thead>
+    <tr>
+      <th scope="col">usuario</th>
+      <th scope="col">estado</th>
+      <th scope="col">rol</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users" (click)="vewUser(user)" >
+      <td>{{user.name}}</td>
+      <td>{{user.active}}</td>
+      <td>{{user.rol.rol}}</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="showDiff == true " class="container  colorizacion-containers  p-3 view-window">
+    <app-create-user (messageEvent)="receiveMessage($event)" (emmiterparentCreator)="connectorForHideCreator($event)" ></app-create-user>
+  </div>
+
+  <div *ngIf="fastView == true" class="container p-0  view-window">
+    <app-view (messageEvent)="receiveMessage($event)" (emmiterparentCreator)="connectorForHideCreator($event)"   class="p-0" *ngIf="userTemp" [detailUser]="userTemp"></app-view>
+  </div>
+
+
 </div>
-<table *ngIf="listUsers == false"  class="table table-hover">
-  <thead>
-  <tr>
-    <th scope="col">usuario</th>
-    <th scope="col">estado</th>
-    <th scope="col">rol</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let user of users" (click)="vewUser(user)" >
-    <td>{{user.name}}</td>
-    <td>{{user.active}}</td>
-    <td>{{user.rol.rol}}</td>
-  </tr>
-  </tbody>
-</table>
-
-<div *ngIf="showDiff == true " class="container-fluid view-window">
-
-  <app-create-user></app-create-user>
-
-</div>
-
-<div *ngIf="fastView == true" class="container-fluid view-window">
-
-  <app-view  *ngIf="userTemp" [detailUser]="userTemp"></app-view>
-
-</div>
-

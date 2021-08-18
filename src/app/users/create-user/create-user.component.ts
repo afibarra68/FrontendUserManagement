@@ -1,4 +1,4 @@
-import {Component, ChangeDetectorRef, OnInit} from '@angular/core';
+import {Component, Output, OnInit, EventEmitter} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {IUser} from "../../../share/models/IUser";
 import {UserService} from "../user.service";
@@ -12,21 +12,22 @@ import {Router} from "@angular/router";
 })
 export class CreateUserComponent implements OnInit {
 
+  comunicator:boolean = false;
+  showViewCreate?:boolean;
 
+  @Output() messageEvent = new EventEmitter<boolean>()
+  @Output() emmiterparentCreator = new EventEmitter<boolean>()
 
   activated:string ='';
   userCreate:FormGroup;
   iUser!:IUser;
-  private RemoteObservable: any;
 
   constructor(
     private fb : FormBuilder,
     private _router: Router,
     private _us:UserService,
-    private cdRef: ChangeDetectorRef
+
   ) {
-
-
     this.userCreate = this.fb.group({
       id: [''],
       name: ['', Validators.compose([
@@ -46,7 +47,6 @@ export class CreateUserComponent implements OnInit {
 
   }
 
-
   newUser():void{
     this.iUser = this.userCreate.value
     // @ts-ignore
@@ -55,16 +55,15 @@ export class CreateUserComponent implements OnInit {
     }
     this._us.saveUser(this.iUser).subscribe(
 
-      (res:any) => {
+      () => {
         alert("se Ha creado correctamente")
-        window.location.reload()
+        this.messageEvent.emit(this.comunicator = true)
+        this.emmiterparentCreator.emit(this.showViewCreate = false)
       },
       (error) => {
         console.log(error);
       }
     );
   }
-
-
 
 }

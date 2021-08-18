@@ -11,8 +11,6 @@ import {map} from "rxjs/operators";
 })
 export class UserService {
 
-
-
   constructor(private http : HttpClient) { }
 
   public queryUser(req?: any): Observable<IUser[]> {
@@ -21,7 +19,14 @@ export class UserService {
       .pipe(map(res => {
         return res;
       }));
-  };
+  }
+  public queryAllUsers(req?: any): Observable<IUser[]> {
+    let params = createRequestParams(req);
+    return this.http.get<IUser[]>(`${environment.END_POINT}/api/bin`, { params: params })
+      .pipe(map(res => {
+        return res;
+      }));
+  }
 
   public saveUser(user: IUser): Observable<IUser> {
     return this.http.post<IUser>(`${environment.END_POINT}/api/user`, user)
@@ -30,5 +35,11 @@ export class UserService {
       }));
   }
 
+  public deleteUser(id:string): Observable<String>{
+    return this.http.delete<String>(`${environment.END_POINT}/api/user/f297a57a5a/${id}`)
+      .pipe(map(res => {
+        return res;
+      }));
+  }
 
 }

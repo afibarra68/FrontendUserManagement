@@ -1,8 +1,7 @@
 
-<div class="container-fluid">
-  <button (click)="updateItem()"  class="btn btn-primary">editar</button>
-  <button  class="btn btn-danger">Eliminar</button>
-
+<div class="container p-0">
+  <button (click)="updateItem()"  class="btn btn-primary">Editar</button>
+  <button  class="btn btn-danger" (click)="deleteItem(detailUser.id)">Eliminar</button>
   <div class="" *ngIf="edit == false">
     <h3>datos de usuario</h3>
     <p class="text-view btn-light m-0">{{ "nombre: " +  detailUser.name}}</p>
