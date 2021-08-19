@@ -27,7 +27,9 @@ export class UpdateUserComponent implements OnInit {
     private _us:UserService
   ) {
     this.userCreate = this.fb.group({
-      id: ['' ],
+      id: ['' , {disabled: true},Validators.compose([
+        Validators.required
+      ])],
       name: ['', Validators.compose([
         Validators.required
       ])],
@@ -37,6 +39,7 @@ export class UpdateUserComponent implements OnInit {
       ])],
       rol: ['', Validators.required],
     });
+
   }
 
   ngOnInit(): void {

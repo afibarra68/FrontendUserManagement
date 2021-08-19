@@ -2,9 +2,9 @@
   <h3>Actualizar usuario</h3>
   <div class="row">
     <form  [formGroup]="userCreate" novalidate (ngSubmit)="updateUser()" >
-      <div class="text">
-        <label for="id">Id</label>
-        <input type="text" class="form-control" id="id" formControlName="id" name="id" >
+      <div>
+        <label for="id">id</label>
+        <p id="id" class="w-100 form-control">{{userCreate.value.id}}</p>
       </div>
       <div class="text">
         <label for="name">Name</label>
